@@ -18,8 +18,8 @@ class Payment:
     county: str
 
     def to_tuple(self):
-        return (procedure_code, insurance_plan, plan_type, 
-                date, amount, country, state_province, county)
+        return (self.procedure_code, self.insurance_plan, self.plan_type, 
+                self.date, self.amount, self.country, self.state_province, self.county)
     
     def from_tuple(self, procedure_code: str, insurance_plan: str, 
             plan_type: str, date: datetime.date, amount: float, 

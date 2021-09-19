@@ -3,6 +3,9 @@ from hackmit import app
 
 @app.route("/")
 
+@app.route("/report")
+def report():
+    return render_template("report.html")
 
 @app.route("/home")
 def home():
