@@ -74,10 +74,10 @@ class DatabaseTable:
 
     def new_entry(self, connection, data):
         connection.cursor().execute(
-                self.create_insertion_string(), 
+                self.table_insert_string(), 
                 data)
 
-    def new_entries(self, connection, data: []):
+    def new_entries(self, connection, data: list):
         connection.cursor().executemany(
                 self.create_insertion_string(), 
                 data)
