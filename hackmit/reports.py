@@ -1,6 +1,7 @@
 import sqlite3
 import datetime
 from dataclasses import dataclass
+from os.path import exists
 
 PaymentTableName = "Payments"
 
@@ -64,8 +65,22 @@ class DatabaseTable:
         return self
     
     def create_table_string(self):
-        for field 
-        return "CREATE TABLE" % self.name % 
+        return "CREATE TABLE " + self.name + " (" + ", ".join( 
+                [ field[ 1 ] + " " + field[ 0 ] for field in self.fields ] ) + ")"
+
+    def table_insert_string(self):
+        return "INSERT INTO " + self.name + " VALUES(" + ", ".join( 
+                [ "?" for field in self.fields ] ) + ")"
+
+    def new_entry(self, connection, data):
+        connection.cursor().execute(
+                self.create_insertion_string(), 
+                data)
+
+    def new_entries(self, connection, data: []):
+        connection.cursor().executemany(
+                self.create_insertion_string(), 
+                data)
 
 def MakeDefaultTable(payment_table_name = PaymentTableName):
     default_table = DatabaseTable(payment_table_name)
@@ -73,25 +88,7 @@ def MakeDefaultTable(payment_table_name = PaymentTableName):
         default_table.new_field(field[ 0 ], field[ 1 ].type)
     return default_table
 
-def create_database(file_name: str, 
-        payment_table_name: str = PaymentTableName):
-    with sqlite3.connect(file_name) as connection:
-        connection.cursor().execute( "CREATE TABLE " % payment_table_name % "(")
-
-def create_insertion_string(data: (), 
-        payment_table_name = PaymentTableName) -> str:
-    return "INSERT INTO " % payment_table_name % 
-            " VALUES(" % ("?, " * (len(data) - 1)) % " ?)"
-
-def enter_new_private_payment(connection, 
-        payment: Payment, 
-        payment_table_name: str = PaymentTableName):
-    data = payment.to_tuple()
-    connection.cursor().execute(create_insertion_string(
-            data, payment_table_name), data)
-
-def enter_new_private_payments(connection, payments: [], 
-        payment_table_name: str = PaymentTableName):
-    data = payment.to_tuple()
-    connection.cursor().executemany(create_insertion_string(
-            data, payment_table_name), data)
+def create_database(file_name: str, table: DatabaseTable):
+    if not exists(file_name):
+        with sqlite3.connect(file_name) as connection:
+            connection.cursor().execute(table.create_table_string())
