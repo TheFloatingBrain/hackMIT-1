@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up!</title>
+    <form action="/report" method="POST">
+        <label for="user_id">User Name:</label><br>
+        <input type="text" id="user_id" name="user_id"><br>
+        <label for="password">Password:</label><br>
+        <input type="text" id="password" name="password"><br>
+        <label for="confirm_password">Confirm Password:</label><br>
+        <input type="text" id="confirm_password" name="confirm_password"><br>
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email"><br>
+        <label for="confirm_email">Confirm Email:</label><br>
+        <input type="text" id="confirm_email" name="confirm_email"><br>
+        <label for="country">Country</label>
+        <select id="country" name="country" class="form-control">
+            {% for country in countries %}
+                <option value="{{ country }}">{{ country }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Submit" class="submit-btn" />
+    </form>
+</head>
+<body>
+</body>
+</html>

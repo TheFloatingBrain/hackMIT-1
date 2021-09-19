@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Submit Report</title>
+    user_id: str
+    insurance_plan: str
+    plan_type: str
+    country: str
+    state_province: str
+    county: str
+
+    <form action="/report" method="POST">
+        <label for="insurance_plan">Insurance Plan:</label><br>
+        <input type="text" id="insurance_plan" name="insurance_plan"><br>
+        <label for="plan_type">Plan Type</label><br>
+        <input type="text" id="plan_type" name="plan_type"><br>
+            <select id="state_province" name="state_province" class="form-control">
+            {% for country in pycountry.countries %}
+                <option value={{ '"' + country + '"' }}>{{ country }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</head>
+<body>
+</body>
+</html>
