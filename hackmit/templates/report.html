@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Submit Report</title>
-    <form>
+    <form action="/report" method="POST">
         <label for="procedure_code">Procedure Code:</label><br>
         <input type="text" id="procedure_code" name="procedure_code"><br>
         <label for="insurance_plan">Insurance Plan:</label><br>
@@ -334,6 +334,7 @@
         </select>
         <label for="county">County</label><br>
         <input type="text" id="county" name="county"><br>
+        <input type="submit" value="Send" class="submit-btn" />
     </form>
 </head>
 <body>
